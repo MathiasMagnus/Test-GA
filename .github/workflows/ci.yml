@@ -1,0 +1,19 @@
+name: Test CI
+
+on: [pull_request, push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - valami: valami
+          - valami: valami
+            akarmi: akarmi
+    env:
+      VALAMI: ${{ matrix.valami }}
+      AKARMI: ${{ matrix.akarmi }}
+    steps:
+      - name: env
+        run: env
