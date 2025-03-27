@@ -12,8 +12,8 @@ jobs:
           - valami: valami
             akarmi: akarmi
     env:
-      VALAMI: ${{ matrix.valami }}
-      AKARMI: ${{ matrix.akarmi }}
+      VALAMI: ${{ matrix.valami && matrix.valami || DEFAULT }}
+      AKARMI: ${{ matrix.akarmi && matrix.akarmi || DEFAULT }}
     steps:
       - name: env
         run: env
