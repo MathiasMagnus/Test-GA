@@ -1,0 +1,21 @@
+name: Winodws CI
+
+on: [pull_request, push, workflow_call]
+
+jobs:
+  test:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        include:
+          - valami: valami
+          - valami: valami
+            akarmi: akarmi
+    env:
+      VALAMI: ${{ matrix.valami && matrix.valami || 'DEFAULT' }}
+      AKARMI: ${{ matrix.akarmi && matrix.akarmi || 'DEFAULT' }}
+    steps:
+      - name: env
+        run: |
+          Write-Host "AKARMI=$env:AKARMI"
+          Write-Host "VALAMI=$env:VALAMI"

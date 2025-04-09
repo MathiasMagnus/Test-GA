@@ -1,19 +1,17 @@
-name: Test CI
+name: All CI
 
-on: [pull_request, push]
+on:
+  workflow_dispatch:
 
 jobs:
-  test:
+  linux:
+    uses: ./.github/workflows/linux.yml
+  windows:
+    uses: ./.github/workflows/windows.yml
+
+  all:
+    needs: [linux, windows]
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        include:
-          - valami: valami
-          - valami: valami
-            akarmi: akarmi
-    env:
-      VALAMI: matrix.valami && matrix.valami || 'DEFAULT'
-      AKARMI: matrix.akarmi && matrix.akarmi || 'DEFAULT'
     steps:
-      - name: env
-        run: env
+      - run:
+          exit 0
